@@ -33,21 +33,23 @@ Hooks and filters directory? [<dir>/.git/hooks]
 
 #### Primeiro precisamos atualizar todas as nossas dependencias de arquivos.
 
+`git fetch`
+
 `git checkout production`
 
-`git pull orign`
+`git pull origin`
 
 <br>
 
 `git checkout master`
 
-`git pull orign`
+`git pull origin`
 
 <br>
 
 `git checkout develop`
 
-`git pull orign`
+`git pull origin`
 
 <br>
 
