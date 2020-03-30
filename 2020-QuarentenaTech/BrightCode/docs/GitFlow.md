@@ -12,7 +12,7 @@ Branch name for production releases: [master] production
 
 Which branch should be used for integration of the "next release"?
    - master
-Branch name for "next release" development: [master] master
+Branch name for "next release" development: [develop] master
 ```
 
 Agora as opções abaixo podem ser apenas dado enter
@@ -33,21 +33,23 @@ Hooks and filters directory? [<dir>/.git/hooks]
 
 #### Primeiro precisamos atualizar todas as nossas dependencias de arquivos.
 
+`git fetch`
+
 `git checkout production`
 
-`git pull orign`
+`git pull origin`
 
 <br>
 
 `git checkout master`
 
-`git pull orign`
+`git pull origin`
 
 <br>
 
 `git checkout develop`
 
-`git pull orign`
+`git pull origin`
 
 <br>
 
