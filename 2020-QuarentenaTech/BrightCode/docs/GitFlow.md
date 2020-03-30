@@ -12,7 +12,7 @@ Branch name for production releases: [master] production
 
 Which branch should be used for integration of the "next release"?
    - master
-Branch name for "next release" development: [master] master
+Branch name for "next release" development: [develop] master
 ```
 
 Agora as opções abaixo podem ser apenas dado enter
