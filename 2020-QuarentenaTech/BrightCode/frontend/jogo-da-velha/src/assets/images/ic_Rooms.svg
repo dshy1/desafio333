@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="30px" viewBox="0 0 25 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 60 (88103) - https://sketch.com -->
+    <title>Group 8</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 0.272 24.1459 0.272 24.1459 30 0 30"></polygon>
+    </defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-507.000000, -735.000000)">
+            <g id="Group-8" transform="translate(507.000000, 734.000000)">
+                <g id="Group-3" transform="translate(0.000000, 0.728300)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-2"></g>
+                    <path d="M19.8179,0.272 L4.3279,0.272 C1.9419,0.272 -0.0001,2.084 -0.0001,4.31 L-0.0001,30 L24.1459,30 L24.1459,4.31 C24.1459,2.084 22.2039,0.272 19.8179,0.272" id="Fill-1" fill="#001B4D" mask="url(#mask-2)"></path>
+                </g>
+                <path d="M15.2554,28.6205 L2.2594,28.6205 L2.2594,4.9385 C2.2594,3.9285 3.0794,3.1085 4.0904,3.1085 L13.4254,3.1085 C14.4364,3.1085 15.2554,3.9285 15.2554,4.9385 L15.2554,28.6205 Z" id="Fill-4" fill="#FFFFFF"></path>
+                <path d="M13.9351,16.014 C13.9351,17.129 13.1731,18.033 12.2341,18.033 C11.2941,18.033 10.5321,17.129 10.5321,16.014 C10.5321,14.9 11.2941,13.996 12.2341,13.996 C13.1731,13.996 13.9351,14.9 13.9351,16.014" id="Fill-6" fill="#001B4D"></path>
+            </g>
+        </g>
+    </g>
+</svg>
