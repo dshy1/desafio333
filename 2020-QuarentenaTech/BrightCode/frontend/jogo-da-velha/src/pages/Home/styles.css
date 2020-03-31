@@ -1,0 +1,119 @@
+.home-container {
+  width: 100%;
+  height: 100vh;
+  margin: auto;
+  background: #0A5EFB;
+  background-image: url(../../assets/images/bg.png);
+  border: solid 1px transparent;
+  overflow: hidden;
+}
+
+.home-container .home-div-container {
+  width: 294px;
+  height: auto;
+  min-height: 93px;
+  background: #fff;
+  box-shadow: 0 2.5px 10px 0 rgba(0,0,0,.3);
+  border-radius: 6px;
+  margin: 200px auto;
+  font-size: 14px;
+}
+
+.home-container .home-div-container .avatar{
+  width: 92px;
+  height: 92px;
+  min-width: 92px;
+  min-height: 92px;
+  margin: auto;
+  box-shadow: 0 0 0 3px #043173;
+  border: 3px #fff solid;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 100%;
+  position: relative;
+  top: -50px;
+
+}
+
+.home-container .home-div-container .avatar .av{
+  width: 92px;
+  height: 133px;
+  position: absolute;
+  bottom: 0;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.home-container .av0 {
+  background-image: url(../../assets/images/avatar.svg);
+}
+
+.containerForm {
+  width: 200px;
+  min-height: 93px;
+  margin: auto;
+  font-size: 14px;
+  color:#797979;
+}
+
+.containerForm input {
+  font-size: 14px;
+  color:#797979;
+  border-bottom: 1px #707b92 solid;
+  font-weight: bold;
+}
+
+.selectAvatar {
+  top: -8px;
+  right: -8px;
+  width: 40px;
+  height: 40px;
+  border: 2px#fff solid;
+  background-color: #0a5efb;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.selectAvatar::before {
+  content: '\e936';
+  font-weight: 400;
+  font-size: 30px;
+  color: #fff;
+  margin: auto;
+}
+
+.selectAvatar:hover {
+  cursor: pointer;
+  background-color: #216af3;
+}
+
+.actions {
+  margin: 10px 0 20px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column-reverse;
+}
+
+.actions button {
+  margin: 0 10px;
+}
+
+btBlueBig {
+  width: 230px;
+  height: 40px;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  box-shadow: 0 0 0 3px #002043,0 0 0 4px #7c92b0;
+  background-color:#13bafe;
+  border-top-color:#66cfff;
+  border-bottom-color:#248aed;
+}
+
+
+
