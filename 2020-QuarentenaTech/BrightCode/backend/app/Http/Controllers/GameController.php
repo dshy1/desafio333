@@ -14,8 +14,18 @@ use Illuminate\Support\Str;
 
 class GameController extends Controller
 {
+    public function trocaTokenPorID($dados){
+        if($dados->tipo_user == 'G'){
+            $guest =  Guest::where('token', '=', $dados->user)->first();
+            if(isset($guest) AND $guest != ''){
+                $guest =  Guest::where('token', '=', $dados->user)->first();
+                return ['user' => $guest->id, 'tipo_user' => 'G'];
+            }
+        }else{
+            return 'NO_EXISTENTE';
+        }
 
-    private $cookie_user;
+    }
 
     public function createGuestCookie($nick){
         $quantidade = (Guest::all()->count()) + 1;
@@ -23,51 +33,48 @@ class GameController extends Controller
         $guest = new Guest;
         $token = Str::random(64);
         $nick = isset($nick) ? $nick : 'Guest #' . $quantidade;
-        $guest->nick = $nick;
+        $guest->nick = $nick . ' #'.$quantidade;
         while (Guest::where('token', '=', $token)->count() > 0) {
             $token = Str::random(64);
         }
         $guest->token = $token;
         $guest->save();
-        $dados = ['id' => $guest->id, 'nick' => $guest->nick, 'token' => $token];
+        $dados = ['user' => $guest->token, 'nick' => $guest->nick];
         $dados = json_encode($dados);
-        $minutes = 2000;
-        $this->cookie_user = cookie('guest_user', $dados, $minutes);
         return $dados;
      }
 
-     public function crirarGuest(request $request){
+     public function criarGuest(request $request){
         $return = $this->createGuestCookie($request->nick);
         // $return = json_decode($return);
         $dados = json_decode($return);
-        $dados = ['status' => 'OK', 'user' => $dados->id, 'tipo_user' => 'G'];
+        $dados = ['status' => 'OK', 'user_token' => $dados->user, 'tipo_user' => 'G'];
         return $dados;
      }
 
-     public function verificaJogadorLogado(){
-        if(isset(Auth::user()->id) AND Auth::user()->id != ''){
-            $user = Auth::user()->id;
-            $dados = ['status' => 'OK', 'user' => $user->id, 'tipo_user' => 'U'];
-        }else{
-            if($guest = Cookie::get('guest_user')){
-                $this->cookie_user = $guest;
-                $guest = json_decode($guest);
-                $find = Guest::where('id', '=', $guest->id)->where('token', '=', $guest->token)->first();
-                if(isset($find) and $find != ''){
+     public function verificaJogadorLogado($request){
+        if(isset($request->user) AND $request->user != ''){
+            if($request->tipo_user == 'U'){
+                // $user = Auth::where('t');
+                $dados = ['status' => 'ERR', 'user' => 'USEROFF LN 50', 'tipo_user' => 'U'];
+            }elseif($request->tipo_user == 'G'){
+                $guest = Guest::where('token', '=', $request->user)->first();
+                if(isset($guest) and $guest != ''){
                     $dados = ['status' => 'OK', 'user' => $guest->id, 'tipo_user' => 'G'];
                 }else{
                     $dados = ['status' => 'ERROR', 'redirect' => 'login'];
                 }
-            }else{
-                $dados = ['status' => 'ERROR', 'redirect' => 'login'];
             }
-            return $dados;
+        }else{
+            $dados = ['status' => 'ERROR', 'redirect' => 'login'];
         }
+        return $dados;
      }
 
      public function verificaJogadorEmSala($jogador){
-        $user =  strval($jogador['user']);
-        $tipo =  strval($jogador['tipo_user']);
+        $verifica = $this->trocaTokenPorID($jogador);
+        $user = $verifica['user'];
+        $tipo =  $verifica['tipo_user'];
 
         $results = Sala::where('status', '=', 'A')->where('jogador_x', '=', $user)->where('tipo_jogador_x', '=', $tipo)->first();
         if(!$results){
@@ -81,34 +88,41 @@ class GameController extends Controller
         }
      }
 
-
      public function verificaJogadas($mesa){
-        $jogadas = Jogada::where('mesa_id', '=', $mesa)->orderBy('updated_at', 'asc')->get();
+        $jogadas = Jogada::where('sala_id', '=', $mesa)->orderBy('updated_at', 'asc')->get();
         return response()->json($jogadas);
      }
 
      public function verificaVez($mesa, $jogador){
-        $vez_de = Jogada::where('mesa_id', '=', $mesa)->orderBy('updated_at', 'desc')->first();
-        if($jogador['user'] == $vez_de->jogador_id AND $jogador['tipo_user'] == $vez_de->tipo_jogador){
-            return true;
+        $vez_de = Jogada::where('sala_id', '=', $mesa)->orderBy('updated_at', 'desc')->first();
+        if(isset($vez_de) AND $vez_de != ''){
+            if($jogador['user'] == $vez_de->jogador_id AND $jogador['tipo_user'] == $vez_de->tipo_jogador){
+                return false;
+            }else{
+                return true;
+            }
         }else{
-            return false;
+            return true;
         }
+
      }
 
 
      /*
-      *  COMEÇO DAS FUNÇÕES DO GAME
+      *     COMEÇO DAS FUNÇÕES DO GAME
       */
 
 
     public function criarSala(request $request){
-        $jogador = $this->verificaJogadorLogado();
+        // return $request;
+        $jogador = $this->verificaJogadorLogado($request);
 
         if($jogador['status'] == 'OK'){
-            $has_lobby = $this->verificaJogadorEmSala($jogador);
+            $has_lobby = $this->verificaJogadorEmSala($request);
+            // return $has_lobby;
 
             if(isset($jogador['status']) AND $jogador['status'] == 'OK'){
+                // return 'oi';
                 if(!$has_lobby){
                     $sala = new Sala;
                     $sala->jogador_x = $jogador['user'];
@@ -129,8 +143,8 @@ class GameController extends Controller
                         ];
                 }else{
                     $resultado = [
-                        'status' =>  'sucesso',
-                        'msg' => 'tem_sala',
+                        'status' =>  'erro',
+                        'msg' => 'ja_esta_em_sala',
                         'dados' => [
                             'sala' => $has_lobby->codigo_sala
                             ]
@@ -139,22 +153,47 @@ class GameController extends Controller
             }else{
                 $resultado = ['status' =>  'erro', 'msg' => 'erro ao criar sala #10001'];
             }
-            return response()->json($resultado)->withCookie($this->cookie_user);
+            return response()->json($resultado);
         }
-        return response()->json(['status' => 'ERRO', 'redirect' => 'login']);
+        return response()->json(['status' => 'login_invalido', 'msg' => 'Erro no login','redirect' => 'login']);
     }
 
-    public function entrarNaSala($token){
-        $sala = Sala::where('token', '=', $token)->first();
+    public function entrarNaSala(request $request, $token){
+        $sala = Sala::where('codigo_sala', '=', $token)->first();
         if($sala){
-            $jogador = $this->verificaJogadorLogado();
+            $jogador = $this->verificaJogadorLogado($request);
+
+            if($sala->status != 'A'){
+                $jogadas = $this->verificaJogadas($sala->id);
+            }else{
+                $jogadas = ['status' => 'aguardando_jogador'];
+            }
+
             if($jogador['status'] == 'OK'){
-                if($sala->status != 'A'){
-                    $jogadas = $this->verificaJogadas($sala->id);
-                }else{
-                    $jogadas = ['status' => 'sucesso', 'msg' => 'aguardando_jogadas'];
+                if(($sala->jogador_x == $jogador['user'] AND $sala->tipo_jogador_x == $jogador['tipo_user'])){
+                    $dados = [
+                        'status' => 'ja_esta_sala',
+                        'msg' => 'Já está na sala',
+                        'dados' => [
+                            'sala' => $sala->codigo_sala,
+                            'jogador_tipo' => 'X'
+                        ],
+                        'sala' => $jogadas
+                        ];
+                    return $dados;
+                }elseif($sala->jogador_o == $jogador['user'] AND $sala->tipo_jogador_o == $jogador['tipo_user']){
+                    $dados = [
+                        'status' => 'ja_esta_sala',
+                        'msg' => 'Já está na sala',
+                        'dados' => [
+                            'sala' => $sala->codigo_sala,
+                            'jogador_tipo' => 'O'
+                        ],
+                        'sala' => $jogadas
+                        ];
+                    return $dados;
                 }
-                $vez_de = $this->verificaVez($sala->id, $jogador);
+                // $vez_de = $this->verificaVez($sala->id, $jogador);
                 if(!isset($sala->jogador_x) OR $sala->jogador_x == ''){
                     $sala->jogador_x = $jogador['user'];
                     $sala->tipo_jogador_x = $jogador['tipo_user'];
@@ -163,10 +202,10 @@ class GameController extends Controller
                         'status' => 'entrou_sala',
                         'msg' => 'Entrou na sala',
                         'dados' => [
-                            'sala' => $sala->token,
+                            'sala' => $sala->codigo_sala,
                             'jogador_tipo' => 'X'
                         ],
-                        'jogadas' => $jogadas
+                        'sala' => $jogadas
                         ];
                 }elseif(!isset($sala->jogador_o) OR $sala->jogador_o == ''){
                     $sala->jogador_o = $jogador['user'];
@@ -176,10 +215,10 @@ class GameController extends Controller
                         'status' => 'entrou_sala',
                         'msg' => 'Entrou na sala',
                         'dados' => [
-                            'sala' => $sala->token,
+                            'sala' => $sala->codigo_sala,
                             'jogador_tipo' => 'O'
                         ],
-                        'jogadas' => $jogadas
+                        'sala' => $jogadas
                         ];
                 }else{
                     $dados = [
@@ -190,11 +229,13 @@ class GameController extends Controller
                 }
             }else{
                 $dados = [
-                    'status' => 'ERRO',
+                    'status' => 'sem_autenticacao',
                     'msg' => 'Usuario não autenticado',
                     'dados' => [
-                        'sala' => $sala->token]
-                    ];
+                        'sala' => $sala->codigo_sala
+                    ],
+                    'sala' => $jogadas
+                ];
             }
         }else{
             $dados = [
