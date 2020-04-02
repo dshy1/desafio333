@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::post('v1/criarSala', 'GameController@criarSala'); // Método POST - Sem parâmetros necessários.
+Route::post('v1/createGuest', 'GameController@criarGuest'); // PASSAR PARAMETRO NICK (NÃO OBRIGATÓRIO)
+Route::get('v1/entrarSala/{token}', 'GameController@entrarNaSala'); // MÉTODO GET PASSANDO O TOKEN DA SALA
