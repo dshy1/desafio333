@@ -1,0 +1,216 @@
+body {
+  background: #e8e8e8;
+  color: #fefefe;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.lobby-container {
+  display: flex;
+}
+
+.lobby {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: center;
+  width: 60vw;
+  margin: 1rem;
+  padding-left: 10rem;
+}
+
+.room {
+  display: flex;
+  position: relative;
+  width: 254px;
+  height: 289px;
+  margin: 2rem;
+  background: #fefefe;
+  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+}
+
+.o-avatar {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  left: 34px;
+  top: 45px;
+  background: #c4c4c4;
+  border-radius: 15px;
+}
+
+.x-avatar {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  left: 160px;
+  top: 45px;
+  background: #c4c4c4;
+  border-radius: 15px;
+}
+
+.vs-label {
+  position: absolute;
+  width: 19px;
+  height: 21px;
+  left: 118px;
+  top: 75px;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+  color: #ababab;
+}
+
+.o-symbol {
+  position: absolute;
+  width: 31px;
+  height: 31px;
+  left: 49px;
+  top: 116px;
+  border: 4px solid #07a6ff;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
+
+.x-symbol {
+  position: absolute;
+  left: 176px;
+  top: 127px;
+}
+
+.x-line-one {
+  position: absolute;
+  width: 25px;
+  border: 3px solid #ff9e0d;
+  transform: rotate(-135deg);
+}
+
+.x-line-two {
+  position: absolute;
+  width: 25px;
+  border: 3px solid #ff9e0d;
+  transform: rotate(135deg);
+}
+
+.room-status-message {
+  position: absolute;
+  left: 35px;
+  top: 213px;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+  color: #50ad30;
+}
+
+.room-button {
+  position: absolute;
+  width: 156px;
+  height: 34px;
+  left: 50px;
+  top: 270px;
+  background: #0094e7;
+  border-radius: 75px;
+  color: #fefefe;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 21px;
+  border: none;
+}
+
+.board-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  width: 40vw;
+  height: 100vh;
+}
+
+.board-user {
+  position: relative;
+  width: 350px;
+  height: 500px;
+  border-radius: 19px;
+  background: #fefefe;
+}
+
+.user-avatar {
+  display: flex;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: -65px;
+  left: 125px;
+  border-radius: 12px;
+  background: #c4c4c4;
+}
+
+.user-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 110px;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 21px;
+  color: #000;
+}
+
+.game-score {
+  display: flex;
+  justify-content: space-between;
+}
+
+.game-score ul {
+  list-style: none;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+  color: #767676;
+}
+
+.game-score ul li {
+  margin-top: 0.5em;
+  margin-right: 2.2em;
+}
+
+.board-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.board-button button {
+  width: 272px;
+  height: 50px;
+  border-radius: 9px;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+  border: none;
+}
+
+.board-button .buscar-jogo {
+  background: #0094e7;
+  color: #fefefe;
+  margin-top: 3em;
+}
+
+.board-button .criar-sala {
+  background: inherit;
+  color: #0094e7;
+  margin-top: 0.3em;
+}
