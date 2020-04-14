@@ -8,6 +8,18 @@
   overflow: hidden;
 }
 
+.home-container h1 {
+  color: #13bafe;
+  text-shadow: 1px 1px 5px #000;
+  font-size: 37px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.home-container h1 span {
+  color: #ffbf00;
+}
+
 .home-container .home-div-container {
   width: 294px;
   height: auto;
@@ -17,6 +29,22 @@
   border-radius: 6px;
   margin: 200px auto;
   font-size: 14px;
+}
+
+.home-container .home-div-container .sub-title {
+  position: absolute;
+  top: 200px;
+  color: #0257bc;
+  text-align: center;
+  display: none;
+}
+
+.home-container .home-login .social {
+  position: absolute;
+  top: 200px;
+  color: #0257bc;
+  margin-left: -40px;
+  display: none;
 }
 
 .home-container .home-div-container .avatar{
@@ -91,28 +119,301 @@
   background-color: #216af3;
 }
 
-.actions {
-  margin: 10px 0 20px;
+.links {
+  width: 200px;
   height: auto;
+  margin: -150px auto;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column-reverse;
+  flex-direction: column;
+  display: none;
 }
 
-.actions button {
-  margin: 0 10px;
-}
-
-btBlueBig {
-  width: 230px;
+.links .play, .rooms {
+  color: #001b4d;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  width: 100%;
   height: 40px;
   border-top-width: 1px;
   border-bottom-width: 1px;
-  box-shadow: 0 0 0 3px #002043,0 0 0 4px #7c92b0;
+  box-shadow: 0 0 0 3px#002043,0 0 0 4px #7c92b0;
+  margin-bottom: 15px;
+  text-align: center;
+  border-radius: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .3s;
+}
+
+.links .play {
+  background-color:#ffbf00;
+  border-top-color:#ffe100;
+  border-bottom-color:#f88700;
+}
+
+.links .play:hover {
+  background-color:#ffe100;
+}
+
+.links .rooms {
   background-color:#13bafe;
   border-top-color:#66cfff;
   border-bottom-color:#248aed;
+}
+
+.links .rooms:hover {
+  background-color:#66cfff;
+}
+
+.links-mobile {
+  width: 200px;
+  height: auto;
+  margin: -150px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.links-mobile .play-mobile, .rooms-mobile {
+  color: #001b4d;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  width: 100%;
+  height: 40px;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  box-shadow: 0 0 0 3px#002043,0 0 0 4px #7c92b0;
+  margin-bottom: 15px;
+  text-align: center;
+  border-radius: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .3s;
+}
+
+.links-mobile .play-mobile {
+  background-color:#ffbf00;
+  border-top-color:#ffe100;
+  border-bottom-color:#f88700;
+}
+
+.links-mobile .play-mobile:hover {
+  background-color:#f1d602;
+}
+
+.links-mobile .rooms-mobile {
+  background-color:#13bafe;
+  border-top-color:#66cfff;
+  border-bottom-color:#248aed;
+}
+
+.links-mobile .rooms-mobile {
+  background-color:#48c6f8;
+}
+
+.home-login {
+  width: 50%;
+  height: 200px;
+  width: 50%;
+  margin-top: 100px;
+  display: none
+}
+
+.or {
+  width: 54px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.or span {
+  font-family: nunitoblack;
+  width: 54px;
+  height: 54px;
+  color:#868d96;
+  font-size: 18px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  border: 2px #c4c5c6 solid;
+  border-radius: 50%;
+  margin: 8px 0;
+}
+
+.or::before, .or::after {
+  content: '';
+  width: 2px;
+  height: 105px;
+  background-color: #c4c5c6;
+}
+
+@media only screen and (min-width: 1200px) {
+  .home-container .home-div-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    height: auto;
+    margin-top: 40px;
+    padding: 100px;
+  }
+
+  .home-login {
+    display: block;
+    width: 50%;
+    margin-top: -50px;
+    margin-left: 50px;
+    padding: 20px;
+    
+  }
+
+  .home-container .home-login .social {
+    display: block;
+  }
+
+  .home-container .home-div-container .sub-title {
+    display: block;
+  }
+ 
+  .home-login .form-container {
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+  }
+
+  .home-login .form-container label {
+    color:#797979;
+    font-size: 19px;
+    font-weight: bold;
+  }
+
+  .home-login .form-container input {
+    width: 150px;
+    border: 2px#868d96 solid;
+    border-radius: 7px;
+    text-align: left;
+    padding: 0 10px;
+    height: 30px;
+    font-size: 14px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+  }
+
+  .form-container .buttons {
+    width: 100%;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+  }
+
+  .form-container .buttons .login, .register {
+    width: 50%;
+    margin: 10px;
+    color:#001b4d;
+    text-decoration: none;
+    font-size: 18px;
+    width: 100%;
+    height: 40px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    box-shadow: 0 0 0 3px#002043,0 0 0 4px#7c92b0;
+    margin-bottom: 15px;
+    text-align: center;
+    border-radius: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .3s;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .form-container .buttons .login {
+    background-color:#ffbf00;
+    border-top-color:#ffe100;
+    border-bottom-color:#f88700;
+  }
+
+  .form-container .buttons .register {
+    background-color:#13bafe;
+    border-top-color:#66cfff;
+    border-bottom-color:#248aed;
+  }
+
+  .buttons .login:hover {
+    background-color:#ffe100;
+  }
+  
+  .buttons .register:hover {
+    background-color:#66cfff;
+  }
+
+  .home-user {
+    width: 50%;
+    height: 200px;
+    margin-top: 100px;
+  }
+
+  .links {
+    width: 100%;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .links-mobile {
+    display: none;
+  }
+
+  .links .play, .rooms {
+    width: 50%;
+    margin: 10px;
+  }
+
+  .containerForm {
+    display: flex;
+    width: 70%;
+    margin: auto;
+  }
+
+  .containerForm input {
+    width: 150px;
+    border: 2px #868d96 solid;
+    border-radius: 7px;
+    text-align: left;
+    padding: 0 10px;
+    height: 30px;
+  }
+  .containerForm span {
+    color:#797979;
+    padding: 0 15px 0 0;
+    font-size: 19px;
+    font-weight: bold;
+  }
+
+  .containerForm span::before {
+    content: '\e92a';
+    line-height: 1;
+    color:#0a5efb;
+    font-size: 24px;
+    margin: 0 15px 0 0;
+  }
+  
+}
+
+@media only screen and (max-width: 1200px) {
+  .or {
+    display: none;
+  }
 }
 
 
