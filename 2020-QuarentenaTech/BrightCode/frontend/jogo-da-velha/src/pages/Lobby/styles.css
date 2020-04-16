@@ -214,3 +214,38 @@ body {
   color: #0094e7;
   margin-top: 0.3em;
 }
+
+@media screen and (max-width: 960px) {
+  .lobby {
+    width: 40vw;
+  }
+
+  .board-info {
+    width: 50vw;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .lobby-container {
+    flex-direction: column;
+  }
+
+  .lobby {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .board-info {
+    width: 100%;
+    height: 90vh;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .board-info {
+    height: 120vh;
+  }
+}

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Room from './Room'
+import Room from './Room';
 
-import './styles.css'
+import './styles.css';
 
 export default function Lobby() {
   return (
